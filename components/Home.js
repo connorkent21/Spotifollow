@@ -13,12 +13,12 @@ import {
     Modal,
     Button,
     AsyncStorage,
+    Icon,
 } from 'react-native';
 import spotifollowTheme from '../assets/spotifollowTheme';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ArtistCard from './ArtistCard';
 import { searchArtists } from '../api';
-
 
 const { colors, sizing } = spotifollowTheme;
 
@@ -37,6 +37,7 @@ class Home extends Component{
   async getArtists(query) {
     console.log('this is the query');
     let results = await searchArtists(query);
+    console.log('Search Results: ', results);
   }
 
 
