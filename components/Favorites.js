@@ -15,26 +15,20 @@ import {
     AsyncStorage,
 } from 'react-native';
 import spotifollowTheme from '../assets/spotifollowTheme';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import ArtistCard from './ArtistCard';
+
 
 const { colors, sizing } = spotifollowTheme;
 
-class Home extends Component{
+
+class Favorites extends Component {
   constructor(props) {
     super(props);
+    this.state = {
 
+    };
   }
-
-  componentDidMount() {
-
-
-  }
-
-
 
   render() {
-    const {navigate} = this.props.navigation;
     return(
       <SafeAreaView style={styles.container}>
         <StatusBar
@@ -46,37 +40,13 @@ class Home extends Component{
 
         }}>
         <Text style={[styles.title, {letterSpacing: 6, backgroundColor: colors.green,}]}>
-          SPOTIFOLLOW
+          Favorites
         </Text>
       </View>
-      <KeyboardAwareScrollView
-        innerRef={(ref) => { this.scroll = ref; }}
-        scrollEnabled={true}
-        showsVerticalScrollIndicator={false}
-        enableAutomaticScroll={true}
-        enableOnAndroid={true}
-        style={styles.search}
-      >
-        <Text style={styles.subHeader}>Search for your Favorite Artists</Text>
-        <View style={styles.inlineContainer}>
-          <TextInput style={styles.textInput} ref={(el) => this.searchInput = el}/>
-          <View style={styles.buttonView}>
-            <TouchableOpacity onPress={() => {
-                console.log('search clicked');
-                navigate('Favorites');
-              }}>
-              <Text style={{color: colors.white, fontWeight: '700'}}>
-                Search
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <ArtistCard />
-      </KeyboardAwareScrollView>
-      </SafeAreaView>
+    </SafeAreaView>
   )
 
-  }
+    }
 }
 
 
@@ -183,4 +153,5 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Home;
+
+export default Favorites;
