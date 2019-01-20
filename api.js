@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
+const backendURI = 'http://13.58.99.30:5000/';
+const headers = {"Content-Type": "application/json"};
 // not being for now
 export async function login() {
   console.log('trying to login boiii');
@@ -16,27 +18,26 @@ export async function login() {
   console.log('this is the res: ', res);
   return niceRes;
 
-
-//
-// const apiPrefix = 'https://accounts.spotify.com/api';
-// const base64credentials = 'OGNmNTM4MGY1ODhjNGVhMTg4NDk2ZTI1NGVkNjM3NjA6MjZjZjkxMTg2ZDdlNDBhMWI1ZmVlY2Y0NDlmNzk4MWI=';
-//
-// export default async function login4Real() {
-//   console.log('token begin');
-//   const res = await fetch(`${apiPrefix}/token`, {
-//     method: 'POST',
-//     headers: {
-//       Authorization: `Basic ${base64credentials}`,
-//       'Content-Type': 'application/x-www-form-urlencoded',
-//     },
-//     body: 'grant_type=client_credentials',
-//   });
-//   const json = await res.json();
-//   const newToken = json.access_token;
-//   console.log('token is', newToken);
-//   return newToken;
-// }
+}
 
 
+export async function searchArtists(query) {
+  console.log('about to search artists with query: ', query);
+  let newURI = backendURI + 'search';
+  console.log('this is the endpoint im lookin for: ', newURI);
 
+  let body = await JSON.stringify({query});
+  console.log('this is the body: ', body);
+  let res = await fetch(newURI, {
+    method: 'POST',
+    headers:
+    body,
+  })
+  .catch(err => {
+    console.log('error: ', err);
+  });
+
+  let data = await res.json();
+  console.log('this is the data at the end of the flow: ', data);
+  return data;
 }

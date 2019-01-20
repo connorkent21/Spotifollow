@@ -17,6 +17,8 @@ import {
 import spotifollowTheme from '../assets/spotifollowTheme';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ArtistCard from './ArtistCard';
+import { searchArtists } from '../api';
+
 
 const { colors, sizing } = spotifollowTheme;
 
@@ -24,11 +26,17 @@ class Home extends Component{
   constructor(props) {
     super(props);
 
+    this.getArtists = this.getArtists.bind(this);
   }
 
   componentDidMount() {
 
 
+  }
+
+  async getArtists(query) {
+    console.log('this is the query');
+    let results = await searchArtists(query);
   }
 
 
@@ -62,8 +70,8 @@ class Home extends Component{
           <TextInput style={styles.textInput} ref={(el) => this.searchInput = el}/>
           <View style={styles.buttonView}>
             <TouchableOpacity onPress={() => {
-                console.log('search clicked');
-                navigate('Favorites');
+                console.log('search clicked', this.searchInput);
+                this.getArtists(this.searchInput._lastNativeText);
               }}>
               <Text style={{color: colors.white, fontWeight: '700'}}>
                 Search
